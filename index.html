@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>PDF Utility Mini App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<title>PDF Utility</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script async src="https://cdn.adsgram.ai/ads.js"></script>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="app">
-    <h2>📄 PDF Utility</h2>
+<h2>📄 PDF Utility</h2>
 
-    <input type="file" id="fileInput" multiple accept=".pdf,image/*">
+<input type="file" id="files" multiple>
+<button onclick="merge()">Merge PDF</button>
 
-    <button onclick="sendAction('merge')">Merge PDF</button>
-    <button onclick="sendAction('compress')">Compress PDF</button>
-    <button onclick="sendAction('img2pdf')">Image → PDF</button>
+<div id="adsgram"></div>
 
-    <p id="status">Select files & choose action</p>
-  </div>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
+<script>
+Adsgram.init({
+  blockId: "YOUR_ADSGRAM_BLOCK_ID",
+  containerId: "adsgram"
+});
+</script>
 </body>
 </html>
