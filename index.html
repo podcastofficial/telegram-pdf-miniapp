@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>PDF Utility Mini App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,15 +11,13 @@
   <div class="app">
     <h2>📄 PDF Utility</h2>
 
-    <input type="file" id="fileInput" multiple accept=".pdf,image/*"/>
+    <input type="file" id="fileInput" multiple accept=".pdf,image/*">
 
-    <div class="actions">
-      <button onclick="sendAction('merge')">Merge PDF</button>
-      <button onclick="sendAction('compress')">Compress PDF</button>
-      <button onclick="sendAction('img2pdf')">Image → PDF</button>
-    </div>
+    <button onclick="sendAction('merge')">Merge PDF</button>
+    <button onclick="sendAction('compress')">Compress PDF</button>
+    <button onclick="sendAction('img2pdf')">Image → PDF</button>
 
-    <p id="status">Select files & choose an action</p>
+    <p id="status">Select files & choose action</p>
   </div>
 
   <script src="app.js"></script>
