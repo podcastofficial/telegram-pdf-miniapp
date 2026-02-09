@@ -4,22 +4,35 @@ tg.expand();
 const fileInput = document.getElementById("fileInput");
 const statusEl = document.getElementById("status");
 
+// 🔴 CHANGE THIS
+const API_URL = "http://YOUR_VPS_IP:8000/upload";
+
 function sendAction(action) {
   if (!fileInput.files.length) {
-    statusEl.innerText = "❌ Please select files first";
+    statusEl.innerText = "❌ Select files first";
     return;
   }
 
-  // NOTE: GitHub Pages backend nahi chalata
-  // Isliye yahan hum bot ko data bhej rahe hain
-  // Actual file upload next step me VPS API se hoga
+  const formData = new FormData();
+  for (const file of fileInput.files) {
+    formData.append("files", file);
+  }
 
-  const payload = {
-    action,
-    files: fileInput.files.length,
-    user_id: tg.initDataUnsafe?.user?.id || null
-  };
+  formData.append("action", action);
+  formData.append("user_id", tg.initDataUnsafe?.user?.id || "guest");
 
-  tg.sendData(JSON.stringify(payload));
-  statusEl.innerText = `✅ ${action.toUpperCase()} request sent to bot`;
+  statusEl.innerText = "⏳ Uploading...";
+
+  fetch(API_URL, { method: "POST", body: formData })
+    .then(res => res.json())
+    .then(data => {
+      statusEl.innerText = "✅ Uploaded. Processing started.";
+      tg.sendData(JSON.stringify({
+        task_id: data.task_id,
+        action: action
+      }));
+    })
+    .catch(() => {
+      statusEl.innerText = "❌ Upload failed";
+    });
 }
