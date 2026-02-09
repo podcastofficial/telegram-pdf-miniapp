@@ -1,27 +1,14 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
+body{
+  background:#0f172a;
+  color:white;
+  text-align:center;
+  font-family:sans-serif;
 }
-
-.app {
-  padding: 16px;
-  text-align: center;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: none;
-  background: #22c55e;
-  color: black;
-}
-
-#status {
-  margin-top: 10px;
-  font-size: 14px;
+button{
+  width:90%;
+  padding:12px;
+  background:#22c55e;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
 }
