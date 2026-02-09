@@ -1,0 +1,7 @@
+.cache/
+.local/
+.npm/
+.ssh/
+bot_backups/
+__pycache__/
+.env

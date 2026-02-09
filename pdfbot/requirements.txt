@@ -1,0 +1,6 @@
+python-telegram-bot==22.6
+pdf2image
+pillow
+img2pdf
+PyPDF2
+python-docx
