@@ -1,14 +1,17 @@
-body{
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  font-family:sans-serif;
+body {
+  background: #0a1d37;
+  color: white;
+  text-align: center;
+  font-family: Arial;
 }
-button{
-  width:90%;
-  padding:12px;
-  background:#22c55e;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
+
+button {
+  width: 90%;
+  margin: 10px;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background: #1e90ff;
+  color: white;
 }
