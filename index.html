@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PDF Master Bot</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="adsgram.js"></script>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>PDF Master Bot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css">
+<script src="adsgram.js"></script>
 </head>
+
 <body>
+<div class="container">
+    <h1>📄 PDF Master Bot</h1>
 
-<h2>📄 PDF Master Bot</h2>
-
-<button onclick="sendAction('pdf_to_jpg')">PDF → JPG</button>
-<button onclick="sendAction('jpg_to_pdf')">JPG → PDF</button>
-<button onclick="sendAction('compress')">Compress PDF</button>
-<button onclick="sendAction('lock')">Lock PDF</button>
-<button onclick="sendAction('unlock')">Unlock PDF</button>
+    <button onclick="runAction('pdf_to_jpg')">PDF → JPG</button>
+    <button onclick="runAction('jpg_to_pdf')">JPG → PDF</button>
+    <button onclick="runAction('compress')">Compress PDF</button>
+    <button onclick="runAction('lock')">Lock PDF</button>
+    <button onclick="runAction('unlock')">Unlock PDF</button>
+</div>
 
 <script src="app.js"></script>
 </body>
