@@ -1,12 +1,10 @@
 function showAd(callback) {
-  if (!window.Adsgram) {
-    callback();
-    return;
-  }
-
-  Adsgram.show({
-    blockId: "17049",
-    onComplete: () => callback(),
-    onError: () => callback()
-  });
+    if (window.Adsgram) {
+        Adsgram.showInterstitialAd({
+            blockId: "17049",
+            onClose: callback
+        });
+    } else {
+        callback();
+    }
 }
