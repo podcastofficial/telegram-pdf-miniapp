@@ -1,0 +1,18 @@
+body {
+  background: #0b1f3a;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+
+.btn {
+  background: #2e86de;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#gameArea {
+  margin-top: 20px;
+}
