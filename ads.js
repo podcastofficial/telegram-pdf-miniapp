@@ -1,4 +1,6 @@
-function showAdAndPlay() {
+let coins = 0;
+
+function showAdReward() {
 
     Adsgram.init({
         pub_id: "17049"
@@ -6,11 +8,9 @@ function showAdAndPlay() {
 
     Adsgram.showRewardedAd({
         onReward: function() {
-            alert("🎉 Ad Completed! Game Starting...");
-            window.location.href = "snake.html";
-        },
-        onClose: function() {
-            alert("❌ You must watch full ad!");
+            coins += 10;
+            document.getElementById("coinCount").innerText = coins;
+            alert("💰 +10 Coins Added!");
         }
     });
 }
