@@ -3,7 +3,7 @@ tg.expand();
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: window.innerWidth,
     height: 400,
     physics: {
         default: 'arcade',
@@ -19,11 +19,13 @@ const config = {
 const game = new Phaser.Game(config);
 
 let player;
-let cursors;
 let platforms;
 let coins;
 let score = 0;
 let scoreText;
+
+let moveLeft = false;
+let moveRight = false;
 
 function preload() {
     this.load.image('ground', 'assets/ground.png');
@@ -47,31 +49,34 @@ function create() {
         setXY: { x: 200, y: 0, stepX: 100 }
     });
 
-    coins.children.iterate(function (child) {
-        child.setBounceY(Phaser.Math.FloatBetween(0.2, 0.4));
-    });
-
     this.physics.add.collider(coins, platforms);
     this.physics.add.overlap(player, coins, collectCoin, null, this);
 
-    cursors = this.input.keyboard.createCursorKeys();
-
     scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '20px', fill: '#fff' });
+
+    // TOUCH EVENTS
+    document.getElementById("left").addEventListener("touchstart", () => moveLeft = true);
+    document.getElementById("left").addEventListener("touchend", () => moveLeft = false);
+
+    document.getElementById("right").addEventListener("touchstart", () => moveRight = true);
+    document.getElementById("right").addEventListener("touchend", () => moveRight = false);
+
+    document.getElementById("jump").addEventListener("touchstart", () => {
+        if (player.body.touching.down) {
+            player.setVelocityY(-330);
+        }
+    });
 }
 
 function update() {
-    if (cursors.left.isDown) {
+    if (moveLeft) {
         player.setVelocityX(-160);
     }
-    else if (cursors.right.isDown) {
+    else if (moveRight) {
         player.setVelocityX(160);
     }
     else {
         player.setVelocityX(0);
-    }
-
-    if (cursors.up.isDown && player.body.touching.down) {
-        player.setVelocityY(-330);
     }
 }
 
