@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>PlayQube</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="stylesheet" href="style.css">
-<title>Game Hub</title>
 </head>
 <body>
 
-<h1>🎮 Game Hub</h1>
+<h2>🎮 PlayQube</h2>
 
-<button onclick="location.href='snake.html'">🐍 Snake Game</button>
-<button onclick="location.href='memory.html'">🧠 Memory Game</button>
-<button onclick="location.href='click.html'">⚡ Click Game</button>
+<div class="card">
+  👤 <span id="username">Loading...</span><br>
+  💰 Coins: <span id="coins">0</span>
+</div>
 
+<button onclick="earnCoins()">🎯 Earn 10 Coins</button>
+<button onclick="loadLeaderboard()">🏆 Leaderboard</button>
+
+<div id="leaderboard"></div>
+
+<script src="app.js"></script>
 </body>
 </html>
