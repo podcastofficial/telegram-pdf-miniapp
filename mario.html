@@ -8,13 +8,36 @@
 <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 
 <style>
-body { margin:0; background:black; }
+body { margin:0; background:black; overflow:hidden; }
 canvas { display:block; margin:auto; }
+
+.controls {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.controls button {
+  width: 80px;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+}
 </style>
 </head>
 <body>
 
-<script src="mario.js"></script>
+<div class="controls">
+  <button id="left">⬅</button>
+  <button id="jump">⬆</button>
+  <button id="right">➡</button>
+</div>
 
+<script src="mario.js"></script>
 </body>
 </html>
