@@ -1,7 +1,7 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
 
-const API = "https://YOUR_BACKEND_URL"; // change this
+const API = "https://YOUR_BACKEND_URL"; // Change this
 
 const config = {
     type: Phaser.AUTO,
@@ -47,7 +47,6 @@ function create() {
 
     this.physics.add.collider(player, platforms);
 
-    // COINS
     coins = this.physics.add.group({
         key: 'coin',
         repeat: 6,
@@ -61,7 +60,6 @@ function create() {
     this.physics.add.collider(coins, platforms);
     this.physics.add.overlap(player, coins, collectCoin, null, this);
 
-    // ENEMIES
     enemies = this.physics.add.group({
         key: 'enemy',
         repeat: 2,
@@ -77,17 +75,13 @@ function create() {
     this.physics.add.collider(enemies, platforms);
     this.physics.add.collider(player, enemies, hitEnemy, null, this);
 
-    scoreText = this.add.text(16, 16, 'Score: 0', 
-        { fontSize: '18px', fill: '#fff' });
-
-    livesText = this.add.text(16, 40, 'Lives: 3', 
-        { fontSize: '18px', fill: '#fff' });
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '18px', fill: '#fff' });
+    livesText = this.add.text(16, 40, 'Lives: 3', { fontSize: '18px', fill: '#fff' });
 
     setupTouchControls();
 }
 
 function update() {
-
     if (gameEnded) return;
 
     if (moveLeft) player.setVelocityX(-180);
@@ -102,7 +96,6 @@ function collectCoin(player, coin) {
 }
 
 function hitEnemy(player, enemy) {
-
     if (gameEnded) return;
 
     lives--;
@@ -117,7 +110,6 @@ function hitEnemy(player, enemy) {
 }
 
 function endGame(scene) {
-
     gameEnded = true;
     player.setVelocity(0,0);
 
@@ -129,29 +121,12 @@ function endGame(scene) {
         'Tap To Restart',
         { fontSize: '18px', fill: '#ffffff' });
 
-    sendScore(score);
-
     scene.input.once('pointerdown', () => {
         scene.scene.restart();
     });
 }
 
-function sendScore(score) {
-
-    if (!tg.initDataUnsafe.user) return;
-
-    fetch(API + "/earn", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            telegram_id: tg.initDataUnsafe.user.id,
-            amount: score
-        })
-    });
-}
-
 function setupTouchControls() {
-
     document.getElementById("left").addEventListener("touchstart", () => moveLeft = true);
     document.getElementById("left").addEventListener("touchend", () => moveLeft = false);
 
