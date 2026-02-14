@@ -1,22 +1,20 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
 
-const API = "https://podcastofficial.github.io/telegram-pdf-miniapp/"; // Change this
-
 const config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
-    height: 420,
+    height: 450,
     physics: {
         default: 'arcade',
-        arcade: { gravity: { y: 600 }, debug: false }
+        arcade: { gravity: { y: 700 }, debug: false }
     },
     scene: { preload, create, update }
 };
 
 const game = new Phaser.Game(config);
 
-let player, platforms, coins, enemies;
+let player, platforms, enemies;
 let score = 0;
 let lives = 3;
 let scoreText, livesText;
@@ -26,80 +24,66 @@ let gameEnded = false;
 
 function preload() {
     this.load.image('ground', 'assets/ground.png');
-    this.load.image('coin', 'assets/coin.png');
     this.load.image('player', 'assets/player.png');
     this.load.image('enemy', 'assets/enemy.png');
 }
 
 function create() {
 
-    gameEnded = false;
     score = 0;
     lives = 3;
+    gameEnded = false;
 
     platforms = this.physics.add.staticGroup();
-    platforms.create(window.innerWidth/2, 400, 'ground')
-        .setScale(3).refreshBody();
+    platforms.create(window.innerWidth/2, 420, 'ground')
+        .setScale(3, 1)
+        .refreshBody();
 
     player = this.physics.add.sprite(100, 300, 'player');
-    player.setBounce(0.1);
+    player.setScale(0.5);
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(player, platforms);
 
-    coins = this.physics.add.group({
-        key: 'coin',
-        repeat: 6,
-        setXY: { x: 150, y: 0, stepX: 100 }
-    });
-
-    coins.children.iterate(function (child) {
-        child.setBounceY(Phaser.Math.FloatBetween(0.2, 0.4));
-    });
-
-    this.physics.add.collider(coins, platforms);
-    this.physics.add.overlap(player, coins, collectCoin, null, this);
-
     enemies = this.physics.add.group({
         key: 'enemy',
-        repeat: 2,
-        setXY: { x: 400, y: 0, stepX: 250 }
+        repeat: 1,
+        setXY: { x: 400, y: 300, stepX: 250 }
     });
 
     enemies.children.iterate(function (enemy) {
-        enemy.setBounce(1);
+        enemy.setScale(0.3);
         enemy.setCollideWorldBounds(true);
-        enemy.setVelocityX(Phaser.Math.Between(-120,120));
+        enemy.setVelocityX(100);
+        enemy.setBounce(1);
     });
 
     this.physics.add.collider(enemies, platforms);
     this.physics.add.collider(player, enemies, hitEnemy, null, this);
 
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '18px', fill: '#fff' });
-    livesText = this.add.text(16, 40, 'Lives: 3', { fontSize: '18px', fill: '#fff' });
+    scoreText = this.add.text(16, 16, 'Score: 0', 
+        { fontSize: '18px', fill: '#fff' });
 
-    setupTouchControls();
+    livesText = this.add.text(16, 40, 'Lives: 3', 
+        { fontSize: '18px', fill: '#fff' });
+
+    setupTouch();
 }
 
 function update() {
     if (gameEnded) return;
 
-    if (moveLeft) player.setVelocityX(-180);
-    else if (moveRight) player.setVelocityX(180);
+    if (moveLeft) player.setVelocityX(-200);
+    else if (moveRight) player.setVelocityX(200);
     else player.setVelocityX(0);
 }
 
-function collectCoin(player, coin) {
-    coin.disableBody(true, true);
-    score += 10;
-    scoreText.setText('Score: ' + score);
-}
-
 function hitEnemy(player, enemy) {
+
     if (gameEnded) return;
 
     lives--;
-    livesText.setText('Lives: ' + lives);
+    livesText.setText("Lives: " + lives);
 
     player.setTint(0xff0000);
     setTimeout(() => player.clearTint(), 200);
@@ -110,8 +94,8 @@ function hitEnemy(player, enemy) {
 }
 
 function endGame(scene) {
+
     gameEnded = true;
-    player.setVelocity(0,0);
 
     scene.add.text(window.innerWidth/2 - 70, 200,
         'GAME OVER',
@@ -126,7 +110,8 @@ function endGame(scene) {
     });
 }
 
-function setupTouchControls() {
+function setupTouch() {
+
     document.getElementById("left").addEventListener("touchstart", () => moveLeft = true);
     document.getElementById("left").addEventListener("touchend", () => moveLeft = false);
 
@@ -135,7 +120,7 @@ function setupTouchControls() {
 
     document.getElementById("jump").addEventListener("touchstart", () => {
         if (player.body.touching.down) {
-            player.setVelocityY(-400);
+            player.setVelocityY(-500);
         }
     });
 }
