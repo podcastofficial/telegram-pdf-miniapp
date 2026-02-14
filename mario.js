@@ -1,7 +1,7 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
 
-const API = "https://YOUR_BACKEND_URL"; // Change this
+const API = "https://podcastofficial.github.io/telegram-pdf-miniapp/"; // Change this
 
 const config = {
     type: Phaser.AUTO,
